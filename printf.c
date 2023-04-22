@@ -39,10 +39,10 @@ int _printf(const char *format, ...)
 				default:
 					break;
 			}
-			else
-				bytes += _putchar(*format);
-			format++;
 		}
-		return (bytes);
+		bytes += _putchar(*format);
+		format++;
 	}
+	va_end(args);
+	return (bytes);
 }

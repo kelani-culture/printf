@@ -13,5 +13,5 @@ int str_specifier(char *string)
 {
 	if (string == NULL)
 		return (1);
-	return (write(STD_FILENO, string, _strlen(string));
+	return (write(STDOUT_FILENO, string, _strlen(string)));
 }

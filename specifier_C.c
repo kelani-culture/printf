@@ -9,9 +9,11 @@
  * Return: bytes
  */
 
-int _putchar(char chr);
+int _putchar(char chr)
 {
 	if (chr == NULL)
+	{
 		return (1);
+	}
 	return (write(STDOUT_FILENO, &chr, 1));
 }
