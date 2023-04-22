@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 					bytes += pcnt;
 					break;
 				default:
-					break;
+					return (-1);
 			}
 		}
 		bytes += _putchar(*format);

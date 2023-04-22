@@ -11,7 +11,9 @@
 
 int str_specifier(char *string)
 {
-	if (string == NULL)
-		return (1);
-	return (write(STDOUT_FILENO, string, _strlen(string)));
+	size_t len = 0;
+
+	while (string[len] != '\0')
+		len++;
+	return (write(STDOUT_FILENO, string, len));
 }
