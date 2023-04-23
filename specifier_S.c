@@ -12,8 +12,17 @@
 int str_specifier(char *string)
 {
 	size_t len =  0;
+	int result;
 
+	/*calculate the length of the string*/
 	while (string[len] != '\0')
 		len++;
-	return (write(STDOUT_FILENO, string, len));
+
+	result = write(STDOUT_FILENO, string, len);
+	/*check if the write returrn a negative val*/
+
+	if (result == -1)
+		return (-1);
+
+	return (result);
 }
