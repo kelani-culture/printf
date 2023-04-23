@@ -40,7 +40,10 @@ int _printf(const char *format, ...)
 					return (-1);
 			}
 		}
-		bytes += _putchar(*format);
+		else
+		{
+			bytes += _putchar(*format);
+		}
 		format++;
 	}
 	va_end(args);
