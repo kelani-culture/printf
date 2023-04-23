@@ -11,9 +11,7 @@
 
 int str_specifier(char *string)
 {
-	size_t len = 0;
-	if (string == NULL)
-		return (-1);
+	size_t len =  0;
 
 	while (string[len] != '\0')
 		len++;
