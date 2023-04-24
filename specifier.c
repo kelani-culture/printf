@@ -27,7 +27,7 @@ void print_string(va_list args, int *count)
 
 
 /**
- * print:_char - implementation of %c
+ * print_char - implementation of %c
  *
  * @args: argument list
  * @count: char count
