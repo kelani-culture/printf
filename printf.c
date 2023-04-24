@@ -41,6 +41,9 @@ int _printf(const char *format, ...)
 				case 'b':
 					print_binary(args, &count);
 					break;
+				case 'o':
+					print_octal(args, &count);
+					break:
 				default:
 					return (-1);
 			}
