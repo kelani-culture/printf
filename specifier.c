@@ -60,3 +60,32 @@ void print_percent(int *count)
 	/*count character*/
 	(*count)++;
 }
+/**
+  *print_integer - Implementation of int specifier
+  *@num:  number
+  *@count: character count
+  *Return void
+  */
+
+void print_integer(int num, int *count)
+{
+	char buffer[32];
+
+	if (num < 0)
+	{
+		write(1, "-", 1);
+		(*count)++;
+		num = -num;
+	}
+
+	do {
+		buffer[i++] = num % 10 + '0';
+		num = num / 10;
+	} while (num);
+
+	while (--i >= 0)
+	{
+		write(1, &buffer[i], 1);
+		(*count)++;
+	}
+}
