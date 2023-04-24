@@ -1,4 +1,6 @@
 #include <stdarg.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include "main.h"
 /**
   *print_octal - print an unsigned interger in octal
