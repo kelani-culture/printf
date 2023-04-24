@@ -44,6 +44,12 @@ int _printf(const char *format, ...)
 				case 'o':
 					print_octal(args, &count);
 					break;
+				case 'x':
+					print_hex(args, &count);
+					break;
+				case 'X':
+					print_hex_upper(args, &count);
+					break;
 				default:
 					return (-1);
 			}

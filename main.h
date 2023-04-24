@@ -2,6 +2,9 @@
 #define MAIN_H
 #include <stdarg.h>
 
+void print_hex(va_list args, int *count);
+void print_hex_upper(va_list args, int *count);
+void print_unsigned(va_list args, int *count);
 void print_octal(va_list args, int *count);
 void print_string(va_list args, int *count);
 void print_char(va_list args, int *count);
