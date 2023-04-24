@@ -55,7 +55,7 @@ void print_hex(va_list args, int *count)
   */
 void print_hex_upper(va_list args, int *count)
 {
-	unsigned int num = va_args(args, unsigned int);
+	unsigned int num = va_arg(args, unsigned int);
 	char buffer[22];
 	int i = 0;
 
