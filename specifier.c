@@ -83,8 +83,37 @@ void print_integer(va_list args, int *count)
 
 	do {
 		buffer[i++] = num % 10 + '0';
-		num = num / 10;
+		num /= 10;
 	} while (num);
+
+	while (--i >= 0)
+	{
+		write(1, &buffer[i], 1);
+		(*count)++;
+	}
+}
+
+/*************** binary **************/
+
+/**
+ * print_binary - implement %b
+ *
+ * @args: argument list
+ * @count: count char
+ * Return: void
+ */
+
+void print_binary(va_list args, int *count)
+{
+	unsigned int num = va_arg(args, unsigned int);
+	char buffer[32];
+	int i = 0;
+
+	do
+	{
+		buffer[i++] = num % 2 + '0';
+		num /= 2;
+	}while(num);
 
 	while (--i >= 0)
 	{

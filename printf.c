@@ -38,6 +38,9 @@ int _printf(const char *format, ...)
 				case 'd': case 'i':
 					print_integer(args, &count);
 					break;
+				case 'b':
+					print_binary(args, &count);
+					break;
 				default:
 					return (-1);
 			}
