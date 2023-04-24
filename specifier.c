@@ -14,7 +14,11 @@ void print_string(va_list args, int *count)
 {
 	/* get ther string argument*/
 	char *str_arg = va_arg(args, char *);
-
+	
+	if (!str_arg)
+	{
+		str_arg = "(null)";
+	}
 	/* loop until the end of the string*/
 	while (*str_arg != '\0')
 	{
