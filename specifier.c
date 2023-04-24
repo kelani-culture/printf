@@ -14,7 +14,7 @@ void print_string(va_list args, int *count)
 {
 	/* get ther string argument*/
 	char *str_arg = va_arg(args, char *);
-	
+
 	if (!str_arg)
 	{
 		str_arg = "(null)";
@@ -62,7 +62,7 @@ void print_percent(int *count)
 }
 /**
   *print_integer - Implementation of int specifier
-  *@num:  number
+  *@args: number
   *@count: character count
   *Return void
   */
