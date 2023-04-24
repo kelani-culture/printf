@@ -67,8 +67,11 @@ void print_percent(int *count)
   *Return void
   */
 
-void print_integer(int num, int *count)
+void print_integer(va_list args, int *count)
 {
+
+	int num = va_arg(args, int);
+	int i = 0;
 	char buffer[32];
 
 	if (num < 0)
