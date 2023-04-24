@@ -43,7 +43,7 @@ int _printf(const char *format, ...)
 					break;
 				case 'o':
 					print_octal(args, &count);
-					break:
+					break;
 				default:
 					return (-1);
 			}
