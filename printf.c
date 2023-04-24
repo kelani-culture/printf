@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include "main.h"
 #include <stdio.h>
-
+#include <unistd.h>
 /**
  * _printf - implementation of the printf function.
  *
@@ -11,44 +11,41 @@
 
 int _printf(const char *format, ...)
 {
-	int bytes = 0;
-	va_list args;
+	int count  = 0; /*number of character to be prinited*/
+	va_list args; /*initizes a variable to arg list*/
 
-	va_start(args, format);
+	va_start(args, format);/*initialize the variable arg list*/
+	/*checks if format is NULL then return -1 as error*/
 	if (format == NULL)
 		return (-1);
-
 	while (*format != '\0')
 	{
-		if (*format == '%')
+		if (*format == '%') /*checks conversion specifiers*/
 		{
-			++format;
+			format++; /*move past the %*/
+			/* handle each conversion specifieir*/
 			switch (*format)
 			{
-				/*string specifier*/
-				case 's':
-					bytes += str_specifier(va_arg(args, char *));
-					break;
-				/*char specifier*/
 				case 'c':
-					bytes += _putchar(va_arg(args, int));
+					print_char(args, &count);
 					break;
-				/*percent*/
+				case 's':
+					print_string(args, &count);
+					break;
 				case '%':
-					bytes += _putchar('%');
-					break;
-				/* binary specifier*/
-				case 'b':
-					bytes += print_binary(va_arg(args, unsigned int));
+					print_percent(&count);
 					break;
 				default:
 					return (-1);
 			}
 		}
 		else
-			bytes += _putchar(*format);
+		{
+			write(1, format, 1);
+			count++;
+		}
 		format++;
 	}
 	va_end(args);
-	return (bytes);
+	return (count);
 }
