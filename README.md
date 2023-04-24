@@ -1,4 +1,4 @@
-/*****************************************printf project with marcus octavian**********************\
+/*****************************************printf project with marcus octavian**************************************************************\
 
 Specifier.c - will contain the implementations of functions for handling each of the supported conversion specifiers in the _printf function. These functions will be responsible for formatting the corresponding argument based on the specifier and writing it to stdout using the write function.
 
