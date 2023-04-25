@@ -27,5 +27,6 @@ void print_percent(va_list args, int  *count, char buffer[]);
 int _printf(const char *format, ...);
 void print_integer(va_list args, int *count, char buffer[]);
 void print_binary(va_list args, int *count, char buffer[]);
+void print_S(va_list args, int *count, char *buffer);
 void check_format(const char *format, va_list args, int *count, char buffer[]);
 #endif /* MAIN_H*/

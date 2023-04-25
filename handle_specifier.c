@@ -17,6 +17,7 @@ void handle_specifier(char specifier, va_list args, int *count, char buffer[])
 
 	specifier_t specifiers[] = {
 		{'c', &print_char},
+		{'S' , &print_S},
 		{'s', &print_string},
 		{'d', &print_integer},
 		{'i', &print_integer},
