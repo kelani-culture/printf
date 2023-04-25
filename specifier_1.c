@@ -14,7 +14,7 @@
 void print_octal(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char str[12];
+	char str[32];
 	int i = 0;
 
 	do {
@@ -50,7 +50,7 @@ void print_octal(va_list args, int *count, char buffer[])
 void print_hex(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char str[8];
+	char str[32];
 	int i = 0;
 
 	do {
@@ -83,7 +83,7 @@ void print_hex(va_list args, int *count, char buffer[])
 void print_hex_upper(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char str[8];
+	char str[32];
 	int i = 0;
 
 	do {
@@ -117,7 +117,7 @@ void print_hex_upper(va_list args, int *count, char buffer[])
 void print_unsigned(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char str[12];
+	char str[32];
 	int i = 0;
 
 	do {

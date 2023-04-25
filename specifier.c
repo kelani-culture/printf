@@ -18,7 +18,7 @@ void print_string(va_list args, int *count, char buffer[])
 	char *str = va_arg(args, char *);
 	int i;
 
-	if (str == NULL)
+	if (!str)
 		str = "(null)";
 
 	for (i = 0; str[i] != '\0'; i++)
@@ -95,7 +95,7 @@ void print_integer(va_list args, int *count, char buffer[])
 
 	int num = va_arg(args, int);
 	int i = 0;
-	char str[12];
+	char str[32];
 
 	if (num < 0)
 	{
