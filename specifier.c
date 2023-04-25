@@ -32,7 +32,6 @@ void print_string(va_list args, int *count, char buffer[])
 		write(1, buffer, *count);
 		*count = 0;
 	}
-	buffer[(*count)++] = '\0';
 
 }
 
@@ -123,7 +122,6 @@ void print_integer(va_list args, int *count, char buffer[])
 		write(1, buffer, *count);
 		*count = 0;
 	}
-	buffer[(*count)++] = '\0';
 }
 
 
@@ -139,7 +137,7 @@ void print_integer(va_list args, int *count, char buffer[])
 void print_binary(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char str[32];
+	char str[33];
 	int i = 0;
 
 	do {
@@ -161,5 +159,4 @@ void print_binary(va_list args, int *count, char buffer[])
 		*count = 0;
 	}
 
-	buffer[(*count)++] = '\0';
 }
