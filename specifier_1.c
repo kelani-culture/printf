@@ -35,7 +35,6 @@ void print_octal(va_list args, int *count, char buffer[])
 		write(1, buffer, *count);
 		*count = 0;
 	}
-	buffer[(*count)++] = '\0';
 }
 
 /******************* Hex Lower *********************/
@@ -68,7 +67,6 @@ void print_hex(va_list args, int *count, char buffer[])
 	{
 		write(1, buffer, *count);
 	}
-	buffer[(*count)++] = '\0';
 }
 
 /****************** Hexadecimal upper ********************/
@@ -103,7 +101,6 @@ void print_hex_upper(va_list args, int *count, char buffer[])
 		*count = 0;
 	}
 
-	buffer[(*count)++] = '\0';
 }
 
 /*************** Unsigned ***********/
@@ -137,6 +134,4 @@ void print_unsigned(va_list args, int *count, char buffer[])
 		write(1, buffer, *count);
 		*count = 0;
 	}
-
-	buffer[(*count)++] = '\0';
 }
