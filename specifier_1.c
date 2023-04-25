@@ -2,94 +2,141 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "main.h"
+
+/******************* Octal ***********************/
 /**
   *print_octal - print an unsigned interger in octal
   *@args: the va_list of arguments
   *@count: the number of characters printed
+  *@buffer: the buffer to write to
   */
-void print_octal(va_list args, int *count)
+
+void print_octal(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char buffer[32];
+	char str[12];
 	int i = 0;
 
 	do {
-		buffer[i++] = num % 8 + '0';
+		str[i++] = num % 8 + '0';
 		num /= 8;
 	} while (num);
 
 	while (--i >= 0)
 	{
-		write(1, &buffer[i], 1);
-		(*count)++;
+		if (*count >= BUF_SIZE - 1)
+			break;
+
+		buffer[(*count)++] = str[i];
 	}
+
+	if (*count >= BUF_SIZE - 1)
+	{
+		write(1, buffer, *count);
+		*count = 0;
+	}
+	buffer[(*count)++] = '\0';
 }
+
+/******************* Hex Lower *********************/
 
 /**
   *print_hex - Print an unsigned int in hex lower case
   *@args: the va_list of arguments
   *@count: the number of characters printed
+  *@buffer: buffer to write to
   */
-void print_hex(va_list args, int *count)
+
+void print_hex(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char buffer[22];
+	char str[8];
 	int i = 0;
 
 	do {
-		buffer[i++] = "0123456789abcdef"[num % 16];
+		str[i++] = "0123456789abcdef"[num % 16];
 		num /= 16;
 	} while (num != 0);
 
-	while (i > 0)
+	while (--i >= 0)
 	{
-		write(1, &buffer[--i], 1);
-		(*count)++;
+		if (*count >= BUF_SIZE - 1)
+			break;
+		buffer[(*count)++] = str[i];
 	}
+	if (*count >= BUF_SIZE - 1)
+	{
+		write(1, buffer, *count);
+	}
+	buffer[(*count)++] = '\0';
 }
+
+/****************** Hexadecimal upper ********************/
 
 /**
   *print_hex_upper - Print an unsigned int in hex upper case
   *@args: the va_list of arguments
   *@count: the number of characters printed
+  *@buffer: the buffer to write to
   */
-void print_hex_upper(va_list args, int *count)
+
+void print_hex_upper(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char buffer[22];
+	char str[8];
 	int i = 0;
 
 	do {
-		buffer[i++] = "0123456789abcdef"[num % 16];
+		str[i++] = "0123456789abcdef"[num % 16];
 		num /= 16;
-	} while (num != 0);
+	} while (num);
 
-	while (i > 0)
+	while (--i >= 0)
 	{
-		write(1, &buffer[--i], 1);
-		(*count)++;
+		if (*count >= BUF_SIZE - 1)
+			break;
+		buffer[(*count)++] = str[i];
 	}
+	if (*count >= BUF_SIZE - 1)
+	{
+		write(1, buffer, *count);
+		*count = 0;
+	}
+
+	buffer[(*count)++] = '\0';
 }
+
+/*************** Unsigned ***********/
 
 /**
   *print_unsigned - Print an unsigned int
   *@args: the va_list of arguments
   *@count: the number of characters printed
+  *@buffer: the buffer to write to
   */
-void print_unsigned(va_list args, int *count)
+void print_unsigned(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char buffer[22];
+	char str[12];
 	int i = 0;
 
 	do {
-		buffer[i++] = (num % 10) + '0';
+		str[i++] = (num % 10) + '0';
 		num /= 10;
-	} while (num != 0);
+	} while (num);
 
-	while (i > 0)
+	while (--i >= 0)
 	{
-		write(1, &buffer[--i], 1);
-		(*count)++;
+		if (*count >= BUF_SIZE - 1)
+			break;
+		buffer[(*count)++] = str[i];
 	}
+
+	if (*count >= BUF_SIZE - 1)
+	{
+		write(1, buffer, *count);
+		*count = 0;
+	}
+
+	buffer[(*count)++] = '\0';
 }

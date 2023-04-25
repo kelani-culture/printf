@@ -2,125 +2,164 @@
 #include <unistd.h>
 #include <stdarg.h>
 
+
+/*************** String *********************/
+
 /**
- * print_string - implementation of %s
- *
- * @args: argument list
- * @count: character count
- * Return: void
+ * print_string - print a string
+ * @args: the va_list of arguments
+ * @buffer: the buffer to store the output
+ * @count: the number of characters printed
  */
 
-void print_string(va_list args, int *count)
+void print_string(va_list args, int *count, char buffer[])
 {
 	/* get ther string argument*/
-	char *str_arg = va_arg(args, char *);
+	char *str = va_arg(args, char *);
+	int i;
 
-	if (!str_arg)
+	if (str == NULL)
+		str = "(null)";
+
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		str_arg = "(null)";
+		if (*count >= BUF_SIZE - 1)
+			break;
+		buffer[(*count)++] = str[i];
 	}
-	/* loop until the end of the string*/
-	while (*str_arg != '\0')
+	if (*count >= BUF_SIZE - 1)
 	{
-		/*write each character of the string*/
-		write(1, str_arg, 1);
-		str_arg++; /*move to the following character*/
-		(*count)++; /*increment the count */
+		write(1, buffer, *count);
+		*count = 0;
 	}
+	buffer[(*count)++] = '\0';
+
 }
 
+/***************** Char ******************/
 
 /**
- * print_char - implementation of %c
- *
- * @args: argument list
- * @count: char count
- * Return: void
+ * print_char - print a single character
+ * @args: the va_list of arguments
+ * @buffer: the buffer to store the output
+ * @count: the number of characters printed
  */
 
-void print_char(va_list args, int *count)
+void print_char(va_list args, int *count, char buffer[])
 {
 	char char_arg = va_arg(args, int); /*get character from argument list*/
 
-	/*write to stdout*/
-	write(1, &char_arg, 1);
-	(*count)++; /*increment each character*/
+	if (*count >= BUF_SIZE)
+	{
+		write(1, buffer, BUF_SIZE);
+		*count = 0;
+	}
+	buffer[(*count)++] = char_arg;
 }
 
+/****************** Percent ****************/
+
 /**
- * print_percent - outout the percent symbol
- * @args: argument list
- * @count: char count
- * Return: void
+ * print_percent - print a percent character
+ * @args: the va_list of arguments
+ * @buffer: the buffer to store the output
+ * @count: the number of characters printed
  */
 
-void print_percent(va_list args, int *count)
+void print_percent(va_list args, int *count, char buffer[])
 {
-
 	UNUSED(args);
-	/*write tot the stdout*/
-	write(1, "%", 1);
-	/*count character*/
-	(*count)++;
+	if (*count < BUF_SIZE - 1)
+	{
+		buffer[(*count)++] = '%';
+	}
+	else
+	{
+		write(1, buffer, *count);
+		*count = 0;
+		buffer[(*count)++] = '%';
+	}
 }
 
-/**
-  *print_integer - Implementation of int specifier
-  *@args: number
-  *@count: character count
-  *Return void
-  */
+/*********************** Integer *************************/
 
-void print_integer(va_list args, int *count)
+/**
+ * print_integer - print a decimal integer
+ * @args: the va_list of arguments
+ * @buffer: the buffer to store the output
+ * @count: the number of characters printed
+ */
+
+void print_integer(va_list args, int *count, char buffer[])
 {
 
 	int num = va_arg(args, int);
 	int i = 0;
-	char buffer[32];
+	char str[12];
 
 	if (num < 0)
 	{
-		write(1, "-", 1);
-		(*count)++;
+		if (*count >= BUF_SIZE - 1)
+			return;
+		buffer[(*count)++] = '-';
 		num = -num;
 	}
 
 	do {
-		buffer[i++] = num % 10 + '0';
+		str[i++] = (num % 10) + '0';
 		num /= 10;
+
 	} while (num);
 
 	while (--i >= 0)
 	{
-		write(1, &buffer[i], 1);
-		(*count)++;
+		if (*count >= BUF_SIZE - 1)
+			break;
+
+		buffer[(*count)++] = str[i];
 	}
+	if (*count >= BUF_SIZE - 1)
+	{
+		write(1, buffer, *count);
+		*count = 0;
+	}
+	buffer[(*count)++] = '\0';
 }
 
-/*************** binary **************/
+
+/*************** Binary **************/
 
 /**
- * print_binary - implement %b
- *
- * @args: argument list
- * @count: count char
- * Return: void
+ * print_binary - print an unsigned integer in binary
+ * @args: the va_list of arguments
+ * @buffer: the buffer to store the output
+ * @count: the number of characters printed
  */
 
-void print_binary(va_list args, int *count)
+void print_binary(va_list args, int *count, char buffer[])
 {
 	unsigned int num = va_arg(args, unsigned int);
-	char buffer[32];
+	char str[32];
 	int i = 0;
 
 	do {
-		buffer[i++] = num % 2 + '0';
+		str[i++] = (num % 2) + '0';
 		num /= 2;
 	} while (num);
 
 	while (--i >= 0)
 	{
-		write(1, &buffer[i], 1);
-		(*count)++;
+		if (*count >= BUF_SIZE - 1)
+			break;
+
+		buffer[(*count)++] = str[i];
 	}
+
+	if (*count >= BUF_SIZE - 1)
+	{
+		write(1, buffer, *count);
+		*count = 0;
+	}
+
+	buffer[(*count)++] = '\0';
 }
