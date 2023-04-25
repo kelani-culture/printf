@@ -49,17 +49,21 @@ void print_char(va_list args, int *count)
 
 /**
  * print_percent - outout the percent symbol
+ * @args: argument list
  * @count: char count
  * Return: void
  */
 
-void print_percent(int *count)
+void print_percent(va_list args, int *count)
 {
+
+	UNUSED(args);
 	/*write tot the stdout*/
 	write(1, "%", 1);
 	/*count character*/
 	(*count)++;
 }
+
 /**
   *print_integer - Implementation of int specifier
   *@args: number
@@ -109,11 +113,10 @@ void print_binary(va_list args, int *count)
 	char buffer[32];
 	int i = 0;
 
-	do
-	{
+	do {
 		buffer[i++] = num % 2 + '0';
 		num /= 2;
-	}while(num);
+	} while (num);
 
 	while (--i >= 0)
 	{
